@@ -9,16 +9,28 @@ const messages = [
 ]
 
 export default function App() {
+  return (
+    <div>
+      <Steps />
+      <Counter />
+    </div>
+  )
+}
+function Steps() {
   const [step, setStep] = useState(1)
   const [isOpen, setIsOpen] = useState(true)
   // const [test, setTest] = useState({ name: 'Zane' })
 
   function handlePrevious() {
-    if (step > 1) setStep(step - 1)
+    if (step > 1) setStep((s) => s - 1)
   }
 
   function handleNext() {
-    if (step < 3) setStep(step + 1)
+    if (step < 3) {
+      // setStep(step + 1)
+      setStep((s) => s + 1)
+      // setStep((s) => s + 1)
+    }
 
     // BAD PRACTICE
     // test.name = 'Zanebla'
@@ -30,8 +42,9 @@ export default function App() {
   // }
 
   return (
-    <>
-      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+    <div>
+      {/* <button className="close" onClick={() => setIsOpen(!isOpen)}> */}
+      <button className="close" onClick={() => setIsOpen((is) => !is)}>
         &times;
       </button>
       {isOpen && (
@@ -64,6 +77,50 @@ export default function App() {
           </div>
         </div>
       )}
-    </>
+    </div>
+  )
+}
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  const [step, setStep] = useState(1)
+
+  const date = new Date('July 21 2027')
+  date.setDate(date.getDate() + count)
+
+  return (
+    <div>
+      <div className="counter">
+        <button onClick={() => setStep((s) => s - 1)}>-</button>
+        <span> Step: {step} </span>
+        <button onClick={() => setStep((s) => s + 1)}>+</button>
+      </div>
+      <div className="counter">
+        <button
+          onClick={() => {
+            setCount((c) => c - step)
+          }}>
+          -
+        </button>
+        <span> Count: {count} </span>
+        <button
+          onClick={() => {
+            setCount((c) => c + step)
+          }}>
+          +
+        </button>
+      </div>
+      <div className="counter">
+        <span>
+          {count === 0
+            ? 'Today is'
+            : count > 0
+            ? `${count} days from today is`
+            : `${Math.abs(count)} days ago was`}
+        </span>
+        <span>&nbsp;</span>
+        <span>{date.toDateString()}</span>
+      </div>
+    </div>
   )
 }

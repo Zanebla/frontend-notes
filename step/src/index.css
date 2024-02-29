@@ -7,6 +7,11 @@ body {
   color: #333;
 }
 
+.counter {
+  display: flex; /* 设置容器为 Flexbox */
+  justify-content: center; /* 在主轴上对齐内容到中心位置 */
+}
+
 .steps {
   width: 600px;
   background-color: #f7f7f7;
@@ -76,7 +81,7 @@ h3 {
 }
 
 .close {
-  position: absolute;
+  /* position: absolute; */
   top: 16px;
   right: 16px;
   border: none;
